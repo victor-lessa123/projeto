@@ -1,0 +1,52 @@
+name: Deploy Vercel preview
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: vercel-preview-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  validate:
+    uses: ./.github/workflows/ci.yml
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Check required deployment configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Configure ${name} in the repository settings."
+              exit 1
+            fi
+          done
+      - name: Install pinned Vercel CLI
+        run: npm install --global vercel@65.5.0
+      - name: Pull preview settings
+        run: vercel pull --yes --environment=preview --token "$VERCEL_TOKEN"
+      - name: Build the configured preview
+        run: vercel build --token "$VERCEL_TOKEN"
+      - name: Deploy and verify readiness
+        shell: bash
+        run: |
+          set -euo pipefail
+          vercel deploy --prebuilt --token "$VERCEL_TOKEN" > "$RUNNER_TEMP/network-jobs-preview.txt"
+          preview_url=$(tail -n 1 "$RUNNER_TEMP/network-jobs-preview.txt")
+          if [[ ! "$preview_url" =~ ^https://[a-zA-Z0-9.-]+\.vercel\.app/?$ ]]; then
+            echo "::error::The CLI did not return a valid Vercel preview URL."
+            exit 1
+          fi
+          vercel inspect "$preview_url" --wait --token "$VERCEL_TOKEN"
+          printf '### Network Jobs preview\n\n%s\n\nPreview only. Supabase and legal review remain prerequisites for production.\n' "$preview_url" >> "$GITHUB_STEP_SUMMARY"

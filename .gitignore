@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.env*
+!.env.example
+playwright-report/
+test-results/
+*.tsbuildinfo
+coverage/
+
+# Generated provider metadata and Next.js declarations
+.vercel/
+next-env.d.ts
