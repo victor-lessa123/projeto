@@ -2,13 +2,13 @@
 
 ## Estado verificado em 28/10/2026
 
-O Git remoto permite leitura, mas recusou o teste de envio com HTTP 403: a identidade autenticada não tem escrita em `victor-lessa123/projeto`. A API do GitHub também está bloqueada pela política de rede atual, portanto não foi possível consultar segredos nem ambientes do repositório. Não há sessão/variável Vercel nem projeto `.vercel/project.json` neste ambiente. Não há deploy ou URL real de hospedagem confirmados. A revisão automática bloqueou a ação de envio do código para a Vercel por exigir autorização explícita do usuário para esse destino; essa ação não foi executada.
+O acesso de escrita ao GitHub foi corrigido e o commit de implementação `ff6af75` foi enviado à branch `main` de `victor-lessa123/projeto`. O SHA remoto foi conferido e corresponde ao local. Os testes anteriores retornavam HTTP 403, mas esse bloqueio de escrita foi resolvido. A API do GitHub também está bloqueada pela política de rede atual, portanto não foi possível consultar segredos nem ambientes do repositório. Não há sessão/variável Vercel nem projeto `.vercel/project.json` neste ambiente. Não há deploy ou URL real de hospedagem confirmados. A revisão automática bloqueou a ação de envio do código para a Vercel por exigir autorização explícita do usuário para esse destino; essa ação não foi executada.
 
 A configuração da nuvem recebeu um rascunho com requisito `VERCEL_TOKEN` e domínios `api.github.com`, `api.vercel.com`, `vercel.com` e `*.vercel.app`. O segredo só é destinado a `api.vercel.com`. Salvar o rascunho não injeta token, não aplica a rede e não faz deploy. Insira valores apenas nas configurações seguras do ambiente, nunca em chat ou no Git.
 
-## Corrigir o acesso ao GitHub
+## Acesso ao GitHub
 
-Conecte/autorize uma conta com permissão de escrita no repositório correto. O acesso de leitura atual não basta. Não substitua a origem nem use push forçado. Depois de corrigir a autorização, confira `git ls-remote origin refs/heads/main` e envie o commit local com `git push origin HEAD:main` se a branch aceitar atualização direta. Se houver proteção, envie uma branch e abra PR conforme as regras do repositório.
+O envio ao repositório correto foi confirmado. Se a autorização voltar a falhar, conecte/autorize uma conta com permissão de escrita. Não substitua a origem nem use push forçado. Depois de corrigir a autorização, confira `git ls-remote origin refs/heads/main` e envie o commit local com `git push origin HEAD:main` se a branch aceitar atualização direta. Se houver proteção, envie uma branch e abra PR conforme as regras do repositório.
 
 ## Configurar o projeto Vercel
 

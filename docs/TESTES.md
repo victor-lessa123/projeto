@@ -11,8 +11,8 @@ Executados em 27/10/2026 no ambiente de nuvem, Node 24.19.0. Nenhuma credencial 
 | `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:e2e` | 14 testes passaram em desktop (1440×1000) e mobile (390×844)                                                                       |
 | Axe-core (dentro dos E2E)                                                | nenhuma violação detectada nas regras WCAG 2 A/AA, 2.1 AA e 2.2 AA analisadas em home, catálogo e cadastro, após conteúdo completo |
 | `npm audit --omit=dev` online                                            | nenhuma vulnerabilidade reportada para dependências de produção na data da execução                                                |
-| `npm ci` | reinstalação pelo lockfile passou |
-| `npm run dev` + HTTP local | home e catálogo responderam com título e estado vazio esperados |
+| `npm ci`                                                                 | reinstalação pelo lockfile passou                                                                                                  |
+| `npm run dev` + HTTP local                                               | home e catálogo responderam com título e estado vazio esperados                                                                    |
 | `git diff --check`                                                       | passou                                                                                                                             |
 
 ## O que foi exercitado
@@ -36,7 +36,7 @@ O PostgreSQL/PGlite executa a migração completa (incluindo extensões), com pa
 - Falha de conexão real com provedor, restauração de backup e aplicação de retenção. Há estados de erro implementados, mas não houve provedor externo conectado para exercitá-los.
 - Testes com leitores de tela e usuários, auditoria manual completa de contraste/acessibilidade; axe não é certificação.
 - Verificação de conteúdo real, permissões das instituições e legislação atual; não há oportunidades públicas inseridas.
-- CI remoto, deploy Vercel e validação em tarefa nova após publicar o ambiente.
+- Acompanhamento do CI remoto após push, deploy Vercel e validação em tarefa nova após publicar o ambiente.
 - Não houve chave secreta real para teste dinâmico de vazamento. Nenhuma service key é usada; variáveis públicas previstas são URL, chave publishable e origem do site.
 
 Os testes automatizados não autorizam produção com minutas jurídicas, sem SMTP e sem validação da integração real.

@@ -2,7 +2,7 @@
 
 ## Estado atual
 
-Implementação em `/workspace/projeto`, sobre o commit inicial do usuário. A implementação está registrada em commit local; o envio ao GitHub está bloqueado por HTTP 403 (a identidade autenticada não tem escrita no repositório). Nenhuma PR ou publicação remota foi confirmada. Leia README.md e docs antes de trabalhar. Use o checkout existente, sem criar worktree por padrão. Preserve mudanças locais.
+Implementação em `/workspace/projeto`, sobre o commit inicial do usuário. A implementação foi enviada à branch `main` de `victor-lessa123/projeto` (commit de código `ff6af75`); o SHA remoto foi conferido. A permissão de escrita foi corrigida após os primeiros erros 403. Nenhuma PR ou publicação em hospedagem foi confirmada. Leia README.md e docs antes de trabalhar. Use o checkout existente, sem criar worktree por padrão. Preserve mudanças locais.
 
 Stack Next.js/React/TypeScript/Tailwind + integração Supabase SSR. Há home original responsiva, catálogo, filtros, detalhes, guias, páginas legais (minutas), contas, painel privado, favoritos, denúncias, empresas pendentes, revisão/admin, fontes, CSV autorizado e auditoria. RLS e constraints estão na migração; sem seeds públicos, fontes integradas ou oportunidades reais. Há CI preparado, ainda não executado remotamente.
 
@@ -36,3 +36,7 @@ Sem alertas, currículos, candidaturas internas, scraping, recomendações ou an
 Deploy de prévia preparado em `.github/workflows/deploy-preview.yml`, com validação reutilizável e CLI Vercel 65.5.0 fixada. Não existe deploy confirmado: falta acesso de escrita no GitHub e autenticação/projeto Vercel. Consulte docs/DEPLOY.md. O rascunho da nuvem declara VERCEL_TOKEN para api.vercel.com e os destinos necessários; valores e aplicação das configurações dependem do proprietário. Não solicite novo token GitHub só por falha no CLI: o Git confirmou um bloqueio de autorização do usuário autenticado. `next-env.d.ts` é gerado e ignorado; typecheck agora roda `next typegen` antes de tsc para funcionar sem `.next` preexistente.
 
 A revisão automática rejeitou o envio do código à Vercel por falta de autorização explícita para esse serviço. Não repetir esse upload sem autorização específica. Após o usuário pedir nova conferência, o GitHub continuou retornando 403 para a identidade `mjm5299545-source`. Corrigir autorização da conta ou conceder escrita no repositório; não trocar origem ou forçar push. A CLI oficial possui prévia temporária sem login, mas isso não libera a política de rede nem substitui a autorização de envio.
+
+## Atualização de entrega ao GitHub em 28/10/2026
+
+O teste de escrita passou e o push do commit `ff6af75` foi concluído. O SHA completo foi comparado com `refs/heads/main` remoto e é idêntico. Os relatos anteriores de 403 são histórico já resolvido. Acompanhamento do CI remoto não foi confirmado. O deploy continua pendente de autorização explícita para enviar o código à Vercel e de acesso de rede/configuração do serviço. O ZIP pode ser obtido diretamente pelo GitHub a partir do commit/branch enviados, evitando a exportação de artefatos da interface.

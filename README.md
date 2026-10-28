@@ -45,9 +45,9 @@ Os E2E atuais validam a experiência **sem Supabase**, em desktop e mobile. Os t
 
 ## Publicação preparada
 
-Há CI em `.github/workflows/ci.yml` e deploy manual de prévia em `.github/workflows/deploy-preview.yml`; a execução no GitHub depende de enviar o commit com uma conta autorizada. Na Vercel selecione framework Next.js, Node 24, `npm ci`, `npm run build` e configure as três variáveis de `.env.example`. Aplique a migração no Supabase antes de usar contas. Configure origem HTTPS, redirects de auth, SMTP e proteções antiabuso. Nunca publique minutas jurídicas como políticas finais.
+Há CI em `.github/workflows/ci.yml` e deploy manual de prévia em `.github/workflows/deploy-preview.yml`; o código já foi enviado à branch `main` do GitHub. O resultado dos workflows remotos ainda precisa ser acompanhado em Actions. Na Vercel selecione framework Next.js, Node 24, `npm ci`, `npm run build` e configure as três variáveis de `.env.example`. Aplique a migração no Supabase antes de usar contas. Configure origem HTTPS, redirects de auth, SMTP e proteções antiabuso. Nunca publique minutas jurídicas como políticas finais.
 
-**Não há URL real de preview ou produção.** Não houve deploy, push ou criação de projeto externo. Publicação pública exige revisão das políticas, segurança e anúncios reais pelo responsável, conforme o documento de requisitos.
+**Não há URL real de preview ou produção.** O envio ao GitHub foi confirmado. Não houve deploy nem criação de projeto de hospedagem externo. Publicação pública exige revisão das políticas, segurança e anúncios reais pelo responsável, conforme o documento de requisitos.
 
 ## Documentação
 
