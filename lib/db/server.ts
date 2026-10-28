@@ -1,34 +1,28 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-export const configured = () =>
-  Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
-  );
+import { supabaseConfig } from "@/lib/db/config";
+export const configured = () => Boolean(supabaseConfig());
 export async function db() {
-  if (!configured()) throw new Error("SUPABASE_NOT_CONFIGURED");
+  const config = supabaseConfig();
+  if (!config) throw new Error("SUPABASE_NOT_CONFIGURED");
   const store = await cookies();
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      cookies: {
-        getAll: () => store.getAll(),
-        setAll: (values) => {
-          try {
-            values.forEach(({ name, value, options }) =>
-              store.set(name, value, {
-                ...options,
-                secure: process.env.NODE_ENV === "production",
-                sameSite: "lax",
-              }),
-            );
-          } catch {
-            /* Cookies are read-only in Server Components; auth actions refresh sessions. */
-          }
-        },
+  return createServerClient(config.url, config.key, {
+    cookies: {
+      getAll: () => store.getAll(),
+      setAll: (values) => {
+        try {
+          values.forEach(({ name, value, options }) =>
+            store.set(name, value, {
+              ...options,
+              secure: process.env.NODE_ENV === "production",
+              sameSite: "lax",
+            }),
+          );
+        } catch {
+          /* Cookies are read-only in Server Components; auth actions refresh sessions. */
+        }
       },
     },
-  );
+  });
 }

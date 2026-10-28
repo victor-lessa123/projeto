@@ -40,3 +40,7 @@ O PostgreSQL/PGlite executa a migração completa (incluindo extensões), com pa
 - Não houve chave secreta real para teste dinâmico de vazamento. Nenhuma service key é usada; variáveis públicas previstas são URL, chave publishable e origem do site.
 
 Os testes automatizados não autorizam produção com minutas jurídicas, sem SMTP e sem validação da integração real.
+
+## Compatibilidade da integração em 28/10/2026
+
+A suíte de validação/banco/configuração passou com **43 testes** (36 anteriores e 7 de configuração Supabase). Lint, typecheck, build e os 14 E2E sem backend configurado também passaram nesta atualização. Os novos casos verificam os nomes publishable e anon, aliases server-side, precedência de valores explícitos, espaços acidentais, configuração incompleta e ausência de fallback para service_role/senha SQL. São testes locais com valores sintéticos, sem chamadas à conta Supabase/Vercel real. A integração real e os e-mails continuam pendentes de validação no projeto do proprietário.

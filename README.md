@@ -2,7 +2,7 @@
 
 Portal em português para aprendizagem, estágio, primeiro emprego e capacitação gratuita, inicialmente em Sergipe. Gratuito para candidatos. Projeto implementado sobre Next.js, TypeScript, Tailwind e Supabase; sem anúncios inventados nem integração presumida com instituições.
 
-**Estado:** páginas e validação local disponíveis. Banco/autenticação externos ainda não configurados por decisão do proprietário. Não é um lançamento de produção. O catálogo inicia vazio; contas ficam indisponíveis sem Supabase e falhas não simulam sucesso.
+**Estado:** páginas e validação local disponíveis. O proprietário informou que conectou Supabase à Vercel; a conexão real ainda não foi validada nesta sessão. Não é um lançamento de produção. O catálogo inicia vazio; contas ficam indisponíveis sem Supabase e falhas não simulam sucesso.
 
 ## Rodar
 

@@ -6,7 +6,7 @@ Implementação em `/workspace/projeto`, sobre o commit inicial do usuário. A i
 
 Stack Next.js/React/TypeScript/Tailwind + integração Supabase SSR. Há home original responsiva, catálogo, filtros, detalhes, guias, páginas legais (minutas), contas, painel privado, favoritos, denúncias, empresas pendentes, revisão/admin, fontes, CSV autorizado e auditoria. RLS e constraints estão na migração; sem seeds públicos, fontes integradas ou oportunidades reais. Há CI preparado, ainda não executado remotamente.
 
-O proprietário informou que **não tem projeto Supabase** e pediu migrações/instruções prontas. Não invente URL, chave, SMTP ou disponibilidade de auth. O catálogo vazio é intencional, formulários de auth ficam indisponíveis sem variáveis. `docs/SUPABASE.md` contém os passos para provisionar, migrar, configurar redirects/SMTP e conceder admin com UUID real.
+Inicialmente o proprietário informou que não tinha projeto Supabase e pediu migrações/instruções prontas. Em 28/10/2026, informou que conectou Vercel (apelido “lessa”) e Supabase no painel Vercel; não há credenciais ou ferramentas desses serviços acessíveis nesta sessão para validar a integração real. Não invente URL, chave, SMTP ou disponibilidade de auth. O catálogo vazio é intencional, formulários de auth ficam indisponíveis sem variáveis. `docs/SUPABASE.md` contém os passos para provisionar, migrar, configurar redirects/SMTP e conceder admin com UUID real.
 
 ## Validação disponível
 
@@ -40,3 +40,7 @@ A revisão automática rejeitou o envio do código à Vercel por falta de autori
 ## Atualização de entrega ao GitHub em 28/10/2026
 
 O teste de escrita passou e o push do commit `ff6af75` foi concluído. O SHA completo foi comparado com `refs/heads/main` remoto e é idêntico. Os relatos anteriores de 403 são histórico já resolvido. Acompanhamento do CI remoto não foi confirmado. O deploy continua pendente de autorização explícita para enviar o código à Vercel e de acesso de rede/configuração do serviço. O ZIP pode ser obtido diretamente pelo GitHub a partir do commit/branch enviados, evitando a exportação de artefatos da interface.
+
+## Reconhecimento da integração Supabase/Vercel
+
+A configuração foi centralizada em `lib/db/config.ts`: aceita URL pública ou `SUPABASE_URL` e chave pública publishable/anon, com os nomes `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_PUBLISHABLE_KEY` e `SUPABASE_ANON_KEY`. Servidor, proxy de sessão e CSP usam a mesma configuração. Não há fallback para service_role nem senha SQL. Foram adicionados sete testes de compatibilidade; a suíte local agora tem 43 testes. O proprietário ainda precisa fornecer a URL pública do site para diagnóstico externo; as variáveis, o redeploy, a migração SQL e os callbacks de autenticação não foram conferidos na Vercel/Supabase reais. Ver o checklist em docs/SUPABASE.md.

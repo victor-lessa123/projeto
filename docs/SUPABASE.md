@@ -25,3 +25,15 @@ Teste com duas contas candidatas e duas empresas. Candidate A não deve ler perf
 ## Operação
 
 Registros sem prazo deixam de ser públicos após 30 dias sem nova verificação; os que têm prazo vencem no horário salvo. Renovação exige admin revisar novamente. Suspensão de origem esconde anúncios imediatamente pelas políticas do banco. Não há verificador de links nem scheduler. Agende limpeza revisada de `audit_logs` (proposta de 180 dias) e monitore backups/erros antes do lançamento. A tabela de limites guarda uma linha por usuário/ação, não uma linha por requisição.
+
+## Já conectei Supabase pela Vercel, mas o site continua desconectado
+
+A conexão entre os serviços não aplica automaticamente as tabelas e políticas deste aplicativo. Confira em Project → Settings → Environment Variables, sem compartilhar valores:
+
+- URL da API: `NEXT_PUBLIC_SUPABASE_URL` ou `SUPABASE_URL`.
+- Uma chave pública: `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_PUBLISHABLE_KEY` ou `SUPABASE_ANON_KEY`, nessa ordem de preferência. O código aceita os nomes modernos e os nomes legados usados por integrações. Não usar `service_role`, chave secreta nem senha de banco nesses campos.
+- Origem do site: `NEXT_PUBLIC_SITE_URL` precisa ser a URL HTTPS real do site para cadastrar contas e recuperar senha. Ela também deve constar nas configurações de redirect do Supabase.
+
+Selecione o ambiente correto para as variáveis (Production para o domínio principal, Preview para prévias). Depois de salvar, faça **Redeploy**: variáveis `NEXT_PUBLIC_*` são incorporadas durante o build e o deploy anterior não passa a reconhecê-las automaticamente.
+
+Se o aviso mudar de “Catálogo ainda não conectado” para falha de consulta, confira se a migração SQL deste repositório foi aplicada **uma vez** no projeto Supabase conectado. A integração Vercel/Supabase não cria `profiles`, `opportunities` e `public_catalog` por conta própria. Catálogo conectado sem anúncios aprovados continuará vazio, corretamente. Sem acesso aos serviços reais, os testes de configuração local não comprovam que o projeto remoto está conectado.
